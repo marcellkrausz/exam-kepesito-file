@@ -8,10 +8,14 @@ import java.util.Map;
 public class Phonebook {
 
     public static void exportPhonebook(Map<String, String> contacts, String output) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(output))) {
-            bw.write(mapToString(contacts));
-        } catch (IOException a) {
-            System.out.println(a.getMessage());
+        if (contacts == null || output == null) {
+            throw new IllegalArgumentException();
+        } else {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(output))) {
+                bw.write(mapToString(contacts));
+            } catch (IOException a) {
+                System.out.println(a.getMessage());
+            }
         }
     }
 
